@@ -1,4 +1,4 @@
-name: Deploy Flask App
+name: BySi-JYp
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Install dependencies (Linux)
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -38,7 +38,7 @@ jobs:
           pip install flask gunicorn pyinstaller
         if: runner.os == 'Windows'
 
-      - name: Build executable
+      - name: Build executable (Linux)
         run: |
           source venv/bin/activate
           pyinstaller --onefile --name flask_app ai_model.py
@@ -50,11 +50,19 @@ jobs:
           pyinstaller --onefile --name flask_app ai_model.py
         if: runner.os == 'Windows'
 
-      - name: Archive Artifacts
+      - name: Archive Artifacts (Linux)
         uses: actions/upload-artifact@v2
         with:
-          name: flask_app_${{ matrix.os }}
+          name: flask_app_linux
           path: dist/flask_app
+        if: runner.os == 'Linux'
+
+      - name: Archive Artifacts (Windows)
+        uses: actions/upload-artifact@v2
+        with:
+          name: flask_app_windows
+          path: dist/flask_app.exe
+        if: runner.os == 'Windows'
 
       - name: Create Release
         id: create_release
