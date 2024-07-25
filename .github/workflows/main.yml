@@ -1,4 +1,4 @@
-name: BySi-JYp
+name: Deploy Flask App
 
 on:
   push:
