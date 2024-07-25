@@ -7,78 +7,34 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python on Ubuntu
+      - name: Set up Python
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget
-          wget https://www.python.org/ftp/python/3.10.6/Python-3.10.6.tgz
-          tar -xvf Python-3.10.6.tgz
-          cd Python-3.10.6
-          ./configure --enable-optimizations
-          make
-          sudo make altinstall
-          python3.10 --version
-        if: runner.os == 'Linux'
-        
-      - name: Set up Python on Windows
-        run: |
-          $url = "https://www.python.org/ftp/python/3.10.6/python-3.10.6-amd64.exe"
-          $output = "python-3.10.6-amd64.exe"
-          Invoke-WebRequest -Uri $url -OutFile $output
-          Start-Process -FilePath $output -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
-          python --version
-        if: runner.os == 'Windows'
+          sudo apt-get install -y python3 python3-venv python3-pip
 
-      - name: Install dependencies (Linux)
+      - name: Install dependencies
         run: |
-          python3.10 -m venv venv
+          python3 -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
           pip install flask gunicorn pyinstaller
-        if: runner.os == 'Linux'
-        
-      - name: Install dependencies (Windows)
-        run: |
-          python -m venv venv
-          venv\Scripts\activate
-          pip install --upgrade pip
-          pip install flask gunicorn pyinstaller
-        if: runner.os == 'Windows'
 
-      - name: Build executable (Linux)
+      - name: Build executable
         run: |
           source venv/bin/activate
-          pyinstaller --onefile --name flask_app ai_model.py
-        if: runner.os == 'Linux'
+          pyinstaller --onefile --name flask_app JYp.py
 
-      - name: Build executable (Windows)
-        run: |
-          venv\Scripts\activate
-          pyinstaller --onefile --name flask_app ai_model.py
-        if: runner.os == 'Windows'
-
-      - name: Archive Artifacts (Linux)
+      - name: Archive Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: flask_app_linux
           path: dist/flask_app
-        if: runner.os == 'Linux'
-
-      - name: Archive Artifacts (Windows)
-        uses: actions/upload-artifact@v2
-        with:
-          name: flask_app_windows
-          path: dist/flask_app.exe
-        if: runner.os == 'Windows'
 
       - name: Create Release
         id: create_release
@@ -91,7 +47,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset (Linux)
+      - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -100,15 +56,3 @@ jobs:
           asset_path: dist/flask_app
           asset_name: flask_app_linux
           asset_content_type: application/octet-stream
-        if: runner.os == 'Linux'
-
-      - name: Upload Release Asset (Windows)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/flask_app.exe
-          asset_name: flask_app_windows.exe
-          asset_content_type: application/octet-stream
-        if: runner.os == 'Windows'
