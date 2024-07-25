@@ -40,7 +40,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.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 }}
         with:
           tag_name: v1.0.0  # 你可以使用其他版本号
           release_name: Release v1.0.0
