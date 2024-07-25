@@ -1,4 +1,4 @@
-name: BySi_JYp
+name: Deploy Flask App
 
 on:
   push:
@@ -14,39 +14,47 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Python
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y python3 python3-pip python3-venv
-        python3 -m venv venv
-        source venv/bin/activate
-        pip install --upgrade pip
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # 使用最新的 Python 版本
 
     - name: Install dependencies
       run: |
+        python -m venv venv
         source venv/bin/activate
-        pip install -r requirements.txt
+        pip install --upgrade pip
+        pip install pyinstaller
+        pip install -r requirements.txt || echo "No requirements.txt file found, proceeding with pyinstaller only"
 
-    - name: Build executable
+    - name: Generate requirements.txt
       run: |
         source venv/bin/activate
-        pip install pyinstaller
+        pip freeze > requirements.txt
+
+    - name: Build application
+      run: |
+        source venv/bin/activate
         pyinstaller --onefile JYp.py
 
-    - name: Create Release
-      id: create_release
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: flask-app
+        path: dist/JYp
+
+    - name: Create GitHub Release
       uses: actions/create-release@v1
       with:
-        token: ${{ secrets.RELEASE_TOKEN }}
-        tag_name: v1.0.0  # 使用你的版本号策略
-        release_name: Release v1.0.0
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
         draft: false
         prerelease: false
+        token: ${{ secrets.RELEASE_TOKEN }}
 
-    - name: Upload Release Asset
+    - name: Upload release asset
       uses: actions/upload-release-asset@v1
       with:
-        token: ${{ secrets.RELEASE_TOKEN }}
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/JYp  # 路径到你的构建可执行文件
-        asset_name: JYp_linux  # 命名该资产
+        asset_path: ./dist/JYp
+        asset_name: JYp
         asset_content_type: application/octet-stream
