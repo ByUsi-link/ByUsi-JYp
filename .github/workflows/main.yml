@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arch: [amd64, arm64, termux]
+        arch: [amd64, arm64]
 
     steps:
     - name: Check out code
@@ -28,38 +28,17 @@ jobs:
         pip install --upgrade pip
         pip install pyinstaller
         pip install -r requirements.txt || echo "No requirements.txt file found, proceeding with pyinstaller only"
-      if: matrix.arch != 'termux'
 
     - name: Build application for amd64 and arm64
       run: |
         source venv/bin/activate
         pyinstaller --onefile JYp.py
-      if: matrix.arch != 'termux'
-
-    - name: Install Termux dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y proot qemu-user-static binfmt-support
-        proot-distro install termux
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- apt-get update
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- apt-get install -y python python-pip python-venv
-      if: matrix.arch == 'termux'
-
-    - name: Build application for Termux
-      run: |
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- python3 -m venv venv
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- venv/bin/pip install --upgrade pip
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- venv/bin/pip install pyinstaller
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- venv/bin/pip install -r requirements.txt || echo "No requirements.txt file found, proceeding with pyinstaller only"
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- pyinstaller --onefile JYp.py
-      if: matrix.arch == 'termux'
 
     - name: Compress artifacts
       run: |
         cd dist
         tar -czf ../BySi_app_${{ matrix.arch }}.tar.gz *
-      if: matrix.arch != 'termux'
-
+    
     - name: List build artifacts
       run: ls -R dist/
 
