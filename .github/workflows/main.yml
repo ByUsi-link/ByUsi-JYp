@@ -1,4 +1,4 @@
-name: Deploy Flask App
+name: Build and Deploy
 
 on:
   push:
@@ -14,38 +14,14 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-      if: matrix.arch != 'termux'
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-      if: matrix.arch != 'termux'
-
-    - name: Install dependencies for amd64 and arm64
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y python3 python3-pip python3-venv
-      if: matrix.arch != 'termux'
-
-    - name: Install dependencies for Termux
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y proot qemu-user-static binfmt-support
-        proot-distro install termux
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- apt-get update
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- apt-get install -y python3 python3-pip python3-venv
-      if: matrix.arch == 'termux'
-
-    - name: Set up Python for amd64 and arm64
-      uses: actions/setup-python@v2
+    - name: Set up Python
+      uses: actions/setup-python@v3
       with:
         python-version: '3.x'  # 使用最新的 Python 版本
-      if: matrix.arch != 'termux'
 
-    - name: Install Python dependencies for amd64 and arm64
+    - name: Install dependencies
       run: |
         python -m venv venv
         source venv/bin/activate
@@ -54,42 +30,41 @@ jobs:
         pip install -r requirements.txt || echo "No requirements.txt file found, proceeding with pyinstaller only"
       if: matrix.arch != 'termux'
 
-    - name: Install Python dependencies for Termux
+    - name: Build application for amd64 and arm64
+      run: |
+        source venv/bin/activate
+        pyinstaller --onefile JYp.py
+      if: matrix.arch != 'termux'
+
+    - name: Install Termux dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y proot qemu-user-static binfmt-support
+        proot-distro install termux
+        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- apt-get update
+        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- apt-get install -y python python-pip python-venv
+      if: matrix.arch == 'termux'
+
+    - name: Build application for Termux
       run: |
         proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- python3 -m venv venv
         proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- venv/bin/pip install --upgrade pip
         proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- venv/bin/pip install pyinstaller
         proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- venv/bin/pip install -r requirements.txt || echo "No requirements.txt file found, proceeding with pyinstaller only"
-      if: matrix.arch == 'termux'
-
-    - name: Build application for amd64 and arm64
-      run: |
-        source venv/bin/activate
-        pyinstaller --onefile JYp.py
-      env:
-        PYINSTALLER_ARCH: ${{ matrix.arch }}
-      if: matrix.arch != 'termux'
-
-    - name: Build application for Termux
-      run: |
-        proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- source venv/bin/activate
         proot-distro login termux --shared-tmp --bind /dev --bind /sys --bind /proc -- pyinstaller --onefile JYp.py
-      env:
-        PYINSTALLER_ARCH: ${{ matrix.arch }}
       if: matrix.arch == 'termux'
 
     - name: Compress artifacts
       run: |
         cd dist
         tar -czf ../BySi_app_${{ matrix.arch }}.tar.gz *
-      env:
-        PYINSTALLER_ARCH: ${{ matrix.arch }}
+      if: matrix.arch != 'termux'
 
     - name: List build artifacts
       run: ls -R dist/
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: BySi_app_${{ matrix.arch }}
         path: BySi_app_${{ matrix.arch }}.tar.gz
