@@ -26,7 +26,7 @@ def upload_file():
         uploaded_file = request.files['file']
         if uploaded_file:
             uploaded_file.save(os.path.join('uploads', uploaded_file.filename))
-            return '<h1>文件上传成功！</h1> <a href="/view">查看上传文件</a>'
+            return '<h1>文件上传成功！</h1> <a href="/view">查看上传文件去</a>'
     
     files = get_uploaded_files()  # 获取上传目录中的文件列表
     file_list = '<h1>已上传的文件列表：</h1><ul>'
