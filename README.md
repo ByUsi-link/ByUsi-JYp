@@ -1,12 +1,42 @@
 # BySi-JYp
+
 [![Deploy Flask App](https://github.com/HuCloud-CN/BySi-JYp/actions/workflows/main.yml/badge.svg)](https://github.com/HuCloud-CN/BySi-JYp/actions/workflows/main.yml)
-## 简单说明
-1. 在这个仓库中我会积极的更新这个项目，有的时候我可能会面向AI编程
-2. 面向AI编程，人人都是大佬
-## JYp自行运行
-1. Git项目
-```sh
-git clone https://github.com/HuCloud-CN/BySi-JYp JYp
-cd JYp
-```
-2. 然后自己研究
+
+## 项目介绍
+
+BySi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、文件列表显示、以及文件在线预览功能。项目的目标是为用户提供一个简洁易用的文件管理平台，便于文件的存储与访问。
+
+### 功能概览
+
+- **文件上传：** 用户可以通过简洁的网页界面上传文件，上传的文件将被保存在服务器的 `uploads` 目录中。
+- **文件列表：** 上传成功后，用户可以查看所有已上传的文件列表，方便管理。
+- **文件预览：** 用户可以通过点击文件列表中的链接，直接在线预览文件内容。
+
+### 安装与运行
+
+要在本地运行 BySi-JYp，您可以通过以下步骤来进行设置：
+
+1. 克隆项目
+    ```sh
+    git clone https://github.com/HuCloud-CN/BySi-JYp JYp
+    cd JYp
+    ```
+
+2. 运行 Flask 应用
+    ```sh
+    python JYp.py
+    ```
+
+3. 在浏览器中访问 `http://localhost:2266` 来使用应用。
+
+### 简单说明
+
+在这个仓库中，我会积极更新该项目，有时候可能会涉及到面向 AI 编程的内容。通过面向 AI 编程，让人人都能成为编程大佬。
+
+### 自行研究
+
+如果您对项目的实现感兴趣，可以自行克隆项目并进行深入研究，了解其背后的实现细节。
+
+---
+
+BySi-JYp 提供了一个简单而功能强大的云存储解决方案，适合想要轻松管理文件的用户。
