@@ -86,7 +86,7 @@ def upload_file():
         <form method=post enctype=multipart/form-data>
             <input type=file name=file>
             <br>
-            <input type=submit value=上传>
+            <input type=submit value=上传吧>
         </form>
         {file_list}
     </body>
