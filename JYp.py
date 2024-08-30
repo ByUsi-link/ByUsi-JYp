@@ -39,7 +39,7 @@ def upload_file():
     <html>
     <head>
         <title>BySi-简单云</title>
-        <link rel="shortcut icon" href="http://juyp.hucl.link/f/WjtZ/20231118_014550_0000.png" type="image/x-icon">
+        <!-- <link rel="shortcut icon" href="http://juyp.hucl.link/f/WjtZ/20231118_014550_0000.png" type="image/x-icon"> -->
         <style>
             body {{
                 font-family: Arial, sans-serif;
