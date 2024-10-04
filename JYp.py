@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, send_file, render_template_string, jsonify
 import os
 import mimetypes
