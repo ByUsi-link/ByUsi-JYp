@@ -19,9 +19,16 @@ BySi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、�
     ```sh
     git clone https://github.com/HuCloud-CN/BySi-JYp JYp
     cd JYp
+    unzip JYp2.1.py
     ```
 
-2. 运行 Flask 应用
+3. 安装依赖
+   ```sh
+   pip install python-magic
+   pip install flask
+   ```
+
+4. 运行 Flask 应用
     ```sh
     python JYp.py
     ```
