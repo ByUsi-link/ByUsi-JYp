@@ -1,8 +1,8 @@
-# BySi-JYp
+# ByUsi-JYp
 
 ## 项目介绍
 
-BySi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、文件列表显示、以及文件在线预览功能。项目的目标是为用户提供一个简洁易用的文件管理平台，便于文件的存储与访问。
+ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、文件列表显示、以及文件在线预览功能。项目的目标是为用户提供一个简洁易用的文件管理平台，便于文件的存储与访问。
 
 ### 功能概览
 
@@ -13,11 +13,11 @@ BySi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、�
 
 ### 安装与运行
 
-要在本地运行 BySi-JYp，您可以通过以下步骤来进行设置：
+要在本地运行 ByUsi-JYp，您可以通过以下步骤来进行设置：
 
 1. 克隆项目
     ```sh
-    git clone https://github.com/HuCloud-CN/BySi-JYp JYp
+    git clone https://github.com/HuCloud-CN/ByUsi-JYp JYp
     cd JYp
     unzip JYp2.2.py
     ```
@@ -43,9 +43,6 @@ BySi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、�
 
 如果您对项目的实现感兴趣，可以自行克隆项目并进行深入研究，了解其背后的实现细节。
 
-### 版本下载
-[![Deploy Flask App](https://github.com/HuCloud-CN/BySi-JYp/actions/workflows/main.yml/badge.svg)](https://github.com/HuCloud-CN/BySi-JYp/actions/workflows/main.yml)
-
 ---
 
-BySi-JYp 提供了一个简单而功能强大的云存储解决方案，适合想要轻松管理文件的用户。
+ByUsi-JYp 提供了一个简单而功能强大的云存储解决方案，适合想要轻松管理文件的用户。
