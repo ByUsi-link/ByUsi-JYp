@@ -11,19 +11,19 @@
 
 - 响应:  
 成功时返回：
-```json
-{
-  "status": "success",
-  "filename": "文件名"
-}
-```
+    ```json
+    {
+      "status": "success",
+      "filename": "文件名"
+    }
+    ```
 失败时返回：
-```json
-{
-  "status": "error",
-  "message": "未提供文件"
-}
-```
+    ```json
+    {
+      "status": "error",
+      "message": "未提供文件"
+    }
+    ```
 ### 2. 列出所有文件
 > 端点: /api/files
 > 请求方法: GET
@@ -31,12 +31,12 @@
 
 - 响应:  
 成功时返回：
-```json
-{
-  "status": "success",
-  "files": ["文件1", "文件2", "文件3"]
-}
-```
+    ```json
+    {
+      "status": "success",
+      "files": ["文件1", "文件2", "文件3"]
+    }
+    ```
 
 ### 3. 获取文件详情
 > 端点: /api/file/<filename>
@@ -48,21 +48,21 @@
 
 - 响应:  
 成功时返回：
-```json
-{
-  "status": "success",
-  "filename": "文件名",
-  "mime_type": "文件的MIME类型"
-}
-```
+    ```json
+    {
+      "status": "success",
+      "filename": "文件名",
+      "mime_type": "文件的MIME类型"
+    }
+    ```
 
 失败时返回：
-```json
-{
-  "status": "error",
-  "message": "文件未找到"
-}
-```
+    ```json
+    {
+      "status": "error",
+      "message": "文件未找到"
+    }
+    ```
 
 
 ### 4. 下载文件
@@ -77,12 +77,12 @@
 - 响应:  
 成功时返回文件内容，自动触发浏览器的下载行为。  
 失败时返回：
-```json
-{
-  "status": "error",
-  "message": "文件未找到"
-}
-```
+    ```json
+    {
+      "status": "error",
+      "message": "文件未找到"
+    }
+    ```
 
 
 ### 5. 删除文件
@@ -97,20 +97,20 @@
 
 - 响应:  
 成功时返回：
-```json
-{
-  "status": "success",
-  "message": "文件 <filename> 已删除"
-}
-```
+    ```json
+    {
+      "status": "success",
+      "message": "文件 <filename> 已删除"
+    }
+    ```
 
 失败时返回：
-```json
-{
-  "status": "error",
-  "message": "文件未找到"
-}
-```
+    ```json
+    {
+      "status": "error",
+      "message": "文件未找到"
+    }
+    ```
 
 
 ## 错误代码
