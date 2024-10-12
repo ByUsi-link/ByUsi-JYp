@@ -122,29 +122,29 @@
 ## 使用示例
 
 1. 上传文件
-```bash
-curl -X POST -F "file=@/path/to/your/file" http://your-server-address/api/upload
-```
+    ```bash
+    curl -X POST -F "file=@/path/to/your/file" http://your-server-address/api/upload
+    ```
 
 2. 列出所有文件
-```bash
-curl -X GET http://your-server-address/api/files
-```
+    ```bash
+    curl -X GET http://your-server-address/api/files
+    ```
 
 3. 获取文件详情
-```bash
-curl -X GET http://your-server-address/api/file/your-filename
-```
+    ```bash
+    curl -X GET http://your-server-address/api/file/your-filename
+    ```
 
 4. 下载文件
-```bash
-curl -X GET http://your-server-address/api/download/your-filename -o local-filename
-```
+    ```bash
+    curl -X GET http://your-server-address/api/download/your-filename -o local-filename
+    ```
 
 5. 删除文件
-```bash
-curl -X DELETE http://your-server-address/api/delete/your-filename
-```
+    ```bash
+    curl -X DELETE http://your-server-address/api/delete/your-filename
+    ```
 
 ## 安全性
 
