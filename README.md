@@ -1,7 +1,5 @@
 # ByUsi-JYp
 
-[API功能介绍](./api说明文档.md)
-
 
 ## 项目介绍
 
@@ -22,7 +20,7 @@ ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、
     ```sh
     git clone https://github.com/ByUsi-link/ByUsi-JYp JYp
     cd JYp
-    unzip JYp2.4.py
+    unzip JYp2.5.py
     ```
 
 3. 安装依赖
