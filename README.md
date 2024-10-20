@@ -14,7 +14,7 @@ ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、
 - **演示demo：**[Demon](https://juy.hucl.link/)
 
 ### 前端项目
-- **点击该链接查看前端：** [链接](https://github.com/ByUsi-link/ByUsi-templates)
+- **点击该链接查看前端：** [链接](https://github.com/ByUsi-link/JYp-templates)
 
 ### 安装与运行
 
