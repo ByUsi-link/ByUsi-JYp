@@ -32,12 +32,21 @@ ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、
    bash PipDependentAmpere-turn.sh
    ```
 
-4. 运行 Flask 应用
+4. 修改管理员密码和管理员密码加密密钥
+   ```sh
+   vim JYp.py
+   ```
+   > 主要需要修改 `app.secret_key` 的值和 `PASSWORD` 的值
+   > 其中 `app.secret_key` 的值是**管理员密码加密密钥，`PASSWORD` 的值是**管理员密码
+
+5. 运行 Flask 应用
     ```sh
     python JYp.py
     ```
 
-3. 在浏览器中访问 `http://localhost:2266` 来使用应用。
+6. 在浏览器中访问 `http://localhost:2266` 来使用应用。
+
+7. 管理员面板的地址是 `http://localhost:2266/admin`
 
 ### 简单说明
 
