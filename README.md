@@ -21,13 +21,12 @@ ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、
     ```sh
     git clone https://github.com/ByUsi-link/ByUsi-JYp JYp
     cd JYp
-    unzip JYp2.6.py
+    git clone https://github.com/ByUsi-link/JYp-templates ./templates
     ```
 
 3. 安装依赖
    ```sh
-   pip install python-magic
-   pip install flask
+   bash PipDependentAmpere-turn.sh
    ```
 
 4. 运行 Flask 应用
