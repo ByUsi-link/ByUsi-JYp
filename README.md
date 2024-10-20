@@ -37,7 +37,7 @@ ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、
    vim JYp.py
    ```
    > 主要需要修改 `app.secret_key` 的值和 `PASSWORD` 的值
-   > 其中 `app.secret_key` 的值是**管理员密码加密密钥，`PASSWORD` 的值是**管理员密码
+   >> 其中 `app.secret_key` 的值是**管理员密码加密密钥，`PASSWORD` 的值是**管理员密码
 
 5. 运行 Flask 应用
     ```sh
