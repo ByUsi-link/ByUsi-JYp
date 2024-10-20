@@ -19,6 +19,8 @@ ByUsi-JYp 是一个基于 Flask 的简单云存储项目，提供文件上传、
 ### 安装与运行
 
 要在本地运行 ByUsi-JYp，您可以通过以下步骤来进行设置：
+> 在此之前你可能需要安装这些工具
+>> `vim`, `git`, `python3`或者`python`, `python-pip`或者`python3-pip`
 
 1. 克隆项目
     ```sh
