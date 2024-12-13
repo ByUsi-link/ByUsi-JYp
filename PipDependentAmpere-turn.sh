@@ -1,2 +1,2 @@
-pip install python-magic
-pip install flask
+pip install -r  requirements.txt
+ 
